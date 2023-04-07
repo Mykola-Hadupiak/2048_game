@@ -2,6 +2,7 @@
 
 The goal of the game is to combine matching numbers to create the elusive 2048 tile, but it's not as easy as it sounds!
 
+# How was the game created?
 1. Created using Javascript, HTML and CSS.
 2. An array approach was used here to make this game a reality.
 3. I used different filtering and array methods to get what I needed.
@@ -10,4 +11,5 @@ The goal of the game is to combine matching numbers to create the elusive 2048 t
 number falling out 2 - 90%, and 4 - 10%.
 5. For styling, I used my styles to make the game look cool and relaxed.
 
+# Demo
 [DEMO LINK](https://mykola-hadupiak.github.io/2048_game/)

@@ -41,7 +41,7 @@ The goal of the game is to combine matching numbers to create the elusive 2048 t
 ![image](https://user-images.githubusercontent.com/114435233/230660921-ee406abc-7fde-4a47-81dc-40532b2e3c2a.png)
 
 
-
+**GOOD LUCK!!!**
 
 # Demo:
 [DEMO LINK](https://mykola-hadupiak.github.io/2048_game/)

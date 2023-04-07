@@ -11,5 +11,5 @@ The goal of the game is to combine matching numbers to create the elusive 2048 t
 number falling out 2 - 90%, and 4 - 10%.
 5. For styling, I used my styles to make the game look cool and relaxed.
 
-# Demo
+# Demo:
 [DEMO LINK](https://mykola-hadupiak.github.io/2048_game/)

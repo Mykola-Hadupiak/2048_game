@@ -1,4 +1,4 @@
-# 2048 is an addictive and challenging puzzle game
+# [2048](https://mykola-hadupiak.github.io/2048_game/) is an addictive and challenging puzzle game
 
 The goal of the game is to combine matching numbers to create the elusive 2048 tile, but it's not as easy as it sounds!
 

@@ -39,13 +39,16 @@ button.addEventListener('click', () => {
     addNumber();
     updateFieldCell();
   } else if (button.classList.contains('restart')) {
-    button.classList.remove('restart');
-    button.classList.add('start');
-    button.innerHTML = 'Start';
-    messageStart.classList.remove('hidden');
+    if (messageLose.classList.contains('hidden')) {
+      // eslint-disable-next-line no-undef
+      if (!confirm(
+        'Are you sure you want to start a new game? All progress will be lost.'
+      )) {
+        return;
+      }
+    }
     messageLose.classList.add('hidden');
     messageWin.classList.add('hidden');
-    blockGameClick = false;
 
     mainField = [
       [0, 0, 0, 0],
@@ -55,6 +58,8 @@ button.addEventListener('click', () => {
     ];
 
     score = 0;
+    addNumber();
+    addNumber();
     updateFieldCell();
   }
 });

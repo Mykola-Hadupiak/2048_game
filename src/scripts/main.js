@@ -14,6 +14,7 @@ let mainField = [
 let score = 0;
 const mainLength = 4;
 let blockGameClick = false;
+let moved = false;
 
 const button = document.querySelector('.button');
 const fieldRows = document.querySelectorAll('.field-row');
@@ -122,6 +123,20 @@ function updateFieldCell() {
 // ------------------------Arrow keys implementation--------------------
 // #####################################################################
 
+function arraysEqual(arr1, arr2) {
+  if (arr1.length !== arr2.length) {
+    return false;
+  }
+
+  for (let i = 0; i < arr1.length; i++) {
+    if (arr1[i] !== arr2[i]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
 function blockGame() {
   for (let r = 0; r < mainLength; r++) {
     for (let c = 0; c < mainLength; c++) {
@@ -136,6 +151,8 @@ document.addEventListener('keyup', (e) => {
   if ((blockGame() === false) || blockGameClick === false) {
     return;
   }
+
+  const prevField = JSON.parse(JSON.stringify(mainField));
 
   switch (e.code) {
     case 'ArrowRight':
@@ -158,7 +175,12 @@ document.addEventListener('keyup', (e) => {
       return;
   }
 
-  addNumber();
+  if (!arraysEqual(prevField, mainField) && moved) {
+    addNumber();
+  }
+
+  moved = false;
+
   updateFieldCell();
 });
 
@@ -200,12 +222,17 @@ function slider(row) {
 
 function moveRight() {
   for (let r = 0; r < mainLength; r++) {
-    let row = mainField[r];
+    const row = mainField[r];
 
     row.reverse();
-    row = slider(row);
 
-    mainField[r] = row.reverse();
+    const newRow = slider(row);
+
+    if (!arraysEqual(row, newRow)) {
+      moved = true;
+    }
+
+    mainField[r] = newRow.reverse();
   }
 }
 
@@ -213,11 +240,13 @@ function moveRight() {
 
 function moveLeft() {
   for (let r = 0; r < mainLength; r++) {
-    let row = mainField[r];
+    const newRow = slider(mainField[r]);
 
-    row = slider(row);
+    if (!arraysEqual(mainField[r], newRow)) {
+      moved = true;
+    }
 
-    mainField[r] = row;
+    mainField[r] = newRow;
   }
 }
 
@@ -225,14 +254,21 @@ function moveLeft() {
 
 function moveUp() {
   for (let c = 0; c < mainLength; c++) {
-    let row = [
-      mainField[0][c], mainField[1][c], mainField[2][c], mainField[3][c],
-    ];
-
-    row = slider(row);
+    const column = [];
 
     for (let r = 0; r < mainLength; r++) {
-      mainField[r][c] = row[r];
+      column.push(mainField[r][c]);
+    }
+
+    const newColumn = slider(column);
+
+    // Проверяем, произошли ли изменения
+    if (!arraysEqual(column, newColumn)) {
+      moved = true;
+    }
+
+    for (let r = 0; r < mainLength; r++) {
+      mainField[r][c] = newColumn[r];
     }
   }
 }
@@ -241,16 +277,21 @@ function moveUp() {
 
 function moveDown() {
   for (let c = 0; c < mainLength; c++) {
-    let row = [
-      mainField[0][c], mainField[1][c], mainField[2][c], mainField[3][c],
-    ];
+    const column = [];
 
-    row.reverse();
-    row = slider(row);
-    row.reverse();
+    for (let r = mainLength - 1; r >= 0; r--) {
+      column.push(mainField[r][c]);
+    }
 
-    for (let r = 0; r < mainLength; r++) {
-      mainField[r][c] = row[r];
+    const newColumn = slider(column);
+
+    // Проверяем, произошли ли изменения
+    if (!arraysEqual(column, newColumn)) {
+      moved = true;
+    }
+
+    for (let r = mainLength - 1; r >= 0; r--) {
+      mainField[r][c] = newColumn[mainLength - 1 - r];
     }
   }
 }
